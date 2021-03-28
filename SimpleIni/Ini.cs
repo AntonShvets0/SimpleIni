@@ -1,26 +1,26 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using IniObject.Exceptions;
-using IniObject.Interfaces;
+using SimpleIni.Exceptions;
+using SimpleIni.Interfaces;
 
-namespace IniObject
+namespace SimpleIni
 {
     /// <summary>
     /// Main class for Ini File
     /// </summary>
-    public class IniRoot : IEnumerable<IniRoot>, IEnumerator<IniRoot>
+    public class Ini : IEnumerable<Ini>, IEnumerator<Ini>
     {
         /// <summary>
         /// Fields in file
         /// </summary>
-        private readonly List<IniRoot> Values = new List<IniRoot>();
+        private readonly List<Ini> Values = new List<Ini>();
         
-        public IEnumerator<IniRoot> GetEnumerator() => this;
+        public IEnumerator<Ini> GetEnumerator() => this;
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IniRoot Current => Values[_index];
+        public Ini Current => Values[_index];
         object IEnumerator.Current => Current;
 
         private int _index = -1;
@@ -42,13 +42,13 @@ namespace IniObject
         /// <summary>
         /// It's for Ini class
         /// </summary>
-        protected IniRoot() { }
+        protected Ini() { }
         
         /// <summary>
         /// Parse data from content
         /// </summary>
         /// <param name="content">Ini string</param>
-        public IniRoot(string content)
+        public Ini(string content)
         {
             GetFieldsFromContent(content);
         }
@@ -145,7 +145,7 @@ namespace IniObject
             return content;
         }
         
-        public IniRoot this[string key]
+        public Ini this[string key]
         {
             get => Values.FirstOrDefault(i => 
                 i is IKey iniPart && iniPart.Key == key
@@ -170,14 +170,14 @@ namespace IniObject
         /// </summary>
         /// <param name="file">Path to file</param>
         /// <returns>IniRoot</returns>
-        public static IniRoot FromFile(string file) => new IniRoot(File.ReadAllText(file));
+        public static Ini FromFile(string file) => new Ini(File.ReadAllText(file));
 
         /// <summary>
         /// Get value from ini part
         /// </summary>
         /// <param name="ini">Part</param>
         /// <returns>Value of field, or section, or root</returns>
-        public static implicit operator string(IniRoot ini)
+        public static implicit operator string(Ini ini)
         {
             if (ini is IniField iniField) return iniField.Value;
 

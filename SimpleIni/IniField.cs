@@ -1,11 +1,11 @@
-﻿﻿using IniObject.Interfaces;
+﻿using SimpleIni.Interfaces;
 
-namespace IniObject
+namespace SimpleIni
 {
     /// <summary>
     /// Part of ini file
     /// </summary>
-    public class IniField : IniRoot, IKey
+    public class IniField : Ini, IKey
     {
         /// <summary>
         /// Key for field

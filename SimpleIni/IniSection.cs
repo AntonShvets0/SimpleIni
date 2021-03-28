@@ -1,8 +1,8 @@
-﻿﻿using IniObject.Interfaces;
+﻿using SimpleIni.Interfaces;
 
-namespace IniObject
+namespace SimpleIni
 {
-    public class IniSection : IniRoot, IKey
+    public class IniSection : Ini, IKey
     {
         /// <summary>
         /// Key for section

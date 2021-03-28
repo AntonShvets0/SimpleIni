@@ -1,4 +1,4 @@
-﻿﻿namespace IniObject.Interfaces
+﻿namespace SimpleIni.Interfaces
 {
     public interface IKey
     {

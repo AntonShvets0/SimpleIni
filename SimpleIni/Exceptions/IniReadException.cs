@@ -1,6 +1,6 @@
-﻿﻿using System;
+﻿using System;
 
-namespace IniObject.Exceptions
+namespace SimpleIni.Exceptions
 {
     internal class IniReadException : Exception
     {
