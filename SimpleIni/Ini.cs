@@ -93,10 +93,10 @@ namespace SimpleIni
             keyValue.RemoveAt(0);
             var value = string.Join('=', keyValue).Trim(' '); 
 
-            var iniField = values.FirstOrDefault(i => i.Key == key);
+            var iniField = values.FirstOrDefault(i => i is IniField ini && ini.Key == key);
             if (iniField != null)
             {
-                iniField.Value = value;
+                (iniField as IniField).Value = value;
                 return;
             }
             
@@ -108,8 +108,8 @@ namespace SimpleIni
         /// </summary>
         /// <param name="scope">Null or section</param>
         /// <returns>Values from scope or values IniRoot</returns>
-        private List<IniField> GetValues(IniSection scope) => 
-            (scope?.Values ?? Values).Select(v => v as IniField).ToList();
+        private List<Ini> GetValues(IniSection scope) => 
+            scope?.Values ?? Values;
 
         /// <summary>
         /// Get scope from row

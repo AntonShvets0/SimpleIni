@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>AntonShvets0</Authors>
+        <RepositoryUrl>https://github.com/AntonShvets0/SimpleIni</RepositoryUrl>
+        <PackageVersion>1.0.1</PackageVersion>
+        <Description>Simple library for work with ini files</Description>
+        <RepositoryType>github</RepositoryType>
     </PropertyGroup>
 
 </Project>
