@@ -16,6 +16,7 @@ namespace SimpleIni
         /// Fields in file
         /// </summary>
         private readonly List<Ini> Values = new List<Ini>();
+        private object _iniSyncObject = new object();
         
         public IEnumerator<Ini> GetEnumerator() => this;
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -147,21 +148,29 @@ namespace SimpleIni
         
         public Ini this[string key]
         {
-            get => Values.FirstOrDefault(i => 
-                i is IKey iniPart && iniPart.Key == key
-                );
+            get {
+                lock (_iniSyncObject) 
+                {
+                    return Values.FirstOrDefault(i => 
+                        i is IKey iniPart && iniPart.Key == key
+                    );
+                }
+            }
             set
             {
-                var data = Values.FirstOrDefault(i => 
-                    i is IKey iniPart && iniPart.Key == key && iniPart.Key == key);
-                
-                if (data != null)
-                    Values.Remove(data);
-
-                if (value is IKey iniKey)
-                    iniKey.Key = key;
-
-                Values.Add(value);
+                lock (_iniSyncObject) 
+                {
+                    var data = Values.FirstOrDefault(i => 
+                        i is IKey iniPart && iniPart.Key == key && iniPart.Key == key);
+                    
+                    if (data != null)
+                        Values.Remove(data);
+    
+                    if (value is IKey iniKey)
+                        iniKey.Key = key;
+    
+                    Values.Add(value);
+                }
             }
         }
         
