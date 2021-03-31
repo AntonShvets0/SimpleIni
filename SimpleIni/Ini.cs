@@ -26,7 +26,10 @@ namespace SimpleIni
 
         private int _index = -1;
         
-        public void Dispose() { }
+        public void Dispose() 
+        { 
+            _index = -1;
+        }
         public void Reset()
         {
             _index = -1;
