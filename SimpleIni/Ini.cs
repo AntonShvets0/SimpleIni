@@ -10,7 +10,7 @@ namespace SimpleIni
     /// <summary>
     /// Main class for Ini File
     /// </summary>
-    public class Ini : IEnumerable<Ini>, IEnumerator<Ini>
+    public class Ini : IEnumerable<Ini>
     {
         /// <summary>
         /// Fields in file
@@ -18,31 +18,9 @@ namespace SimpleIni
         private readonly List<Ini> Values = new List<Ini>();
         private object _iniSyncObject = new object();
         
-        public IEnumerator<Ini> GetEnumerator() => this;
+        public IEnumerator<Ini> GetEnumerator() => Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public Ini Current => Values[_index];
-        object IEnumerator.Current => Current;
-
-        private int _index = -1;
-        
-        public void Dispose() 
-        { 
-            _index = -1;
-        }
-        public void Reset()
-        {
-            _index = -1;
-        }
-
-        public bool MoveNext()
-        {
-            if (Values.Count - 1 < _index + 1) return false;
-            _index++;
-
-            return true;
-        }
-        
         /// <summary>
         /// It's for Ini class
         /// </summary>
