@@ -135,6 +135,8 @@ namespace SimpleIni
         /// <returns>Ini string</returns>
         public override string ToString()
         {
+            if (this is IniField iniField) return iniField.Value;
+            
             var content = "";
 
             foreach (var data in Values)
@@ -187,11 +189,6 @@ namespace SimpleIni
         /// <param name="ini">Part</param>
         /// <returns>Value of field, or section, or root</returns>
         public static implicit operator string(Ini ini)
-        {
-            if (ini is IniField iniField) return iniField.Value;
-
-            return ini.ToString();
-        }
-
+            => ini.ToString();
     }
 }
